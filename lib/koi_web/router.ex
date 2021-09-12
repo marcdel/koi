@@ -21,6 +21,13 @@ defmodule KoiWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+
+    live "/reports", ReportLive.Index, :index
+    live "/reports/new", ReportLive.Index, :new
+    live "/reports/:id/edit", ReportLive.Index, :edit
+
+    live "/reports/:id", ReportLive.Show, :show
+    live "/reports/:id/show/edit", ReportLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.
