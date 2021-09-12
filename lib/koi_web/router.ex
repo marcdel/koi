@@ -19,15 +19,7 @@ defmodule KoiWeb.Router do
 
   scope "/", KoiWeb do
     pipe_through :browser
-
     get "/", PageController, :index
-
-    live "/reports", ReportLive.Index, :index
-    live "/reports/new", ReportLive.Index, :new
-    live "/reports/:id/edit", ReportLive.Index, :edit
-
-    live "/reports/:id", ReportLive.Show, :show
-    live "/reports/:id/show/edit", ReportLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.
@@ -84,6 +76,13 @@ defmodule KoiWeb.Router do
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
+
+    live "/reports", ReportLive.Index, :index
+    live "/reports/new", ReportLive.Index, :new
+    live "/reports/:id/edit", ReportLive.Index, :edit
+
+    live "/reports/:id", ReportLive.Show, :show
+    live "/reports/:id/show/edit", ReportLive.Show, :edit
   end
 
   scope "/", KoiWeb do

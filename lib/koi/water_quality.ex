@@ -13,12 +13,12 @@ defmodule Koi.WaterQuality do
 
   ## Examples
 
-      iex> list_reports()
+      iex> list_reports(5)
       [%Report{}, ...]
 
   """
-  def list_reports do
-    Repo.all(Report)
+  def list_reports(user_id) do
+    Repo.all(from report in Report, where: report.user_id == ^user_id)
   end
 
   @doc """

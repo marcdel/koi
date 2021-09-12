@@ -6,13 +6,15 @@ defmodule Koi.WaterQualityTest do
   describe "reports" do
     alias Koi.WaterQuality.Report
 
+    import Koi.AccountsFixtures
     import Koi.WaterQualityFixtures
 
-    @invalid_attrs %{date: nil, notes: nil}
+    @invalid_attrs %{date: nil}
 
-    test "list_reports/0 returns all reports" do
+    test "list_reports/1 returns all reports for the given user" do
       report = report_fixture()
-      assert WaterQuality.list_reports() == [report]
+      assert WaterQuality.list_reports(report.user_id) == [report]
+      assert WaterQuality.list_reports(report.user_id + 1) == []
     end
 
     test "get_report!/1 returns the report with given id" do
@@ -21,7 +23,8 @@ defmodule Koi.WaterQualityTest do
     end
 
     test "create_report/1 with valid data creates a report" do
-      valid_attrs = %{date: ~D[2021-09-11], notes: "some notes"}
+      %{id: user_id} = user_fixture()
+      valid_attrs = %{date: ~D[2021-09-11], notes: "some notes", user_id: user_id}
 
       assert {:ok, %Report{} = report} = WaterQuality.create_report(valid_attrs)
       assert report.date == ~D[2021-09-11]

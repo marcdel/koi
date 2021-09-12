@@ -8,10 +8,13 @@ defmodule KoiWeb.ReportLiveTest do
   @update_attrs %{date: %{day: 12, month: 9, year: 2021}, notes: "some updated notes"}
   @invalid_attrs %{date: %{day: 30, month: 2, year: 2021}, notes: nil}
 
-  defp create_report(_) do
-    report = report_fixture()
+  defp create_report(%{user: user}) do
+    # use the user from :register_and_log_in_user
+    report = report_fixture(%{user_id: user.id})
     %{report: report}
   end
+
+  setup :register_and_log_in_user
 
   describe "Index" do
     setup [:create_report]

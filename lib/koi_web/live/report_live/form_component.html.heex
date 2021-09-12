@@ -16,6 +16,8 @@
     <%= label f, :notes %>
     <%= text_input f, :notes %>
     <%= error_tag f, :notes %>
+
+    <%= hidden_input f, :user_id %>
   
     <div>
       <%= submit "Save", phx_disable_with: "Saving..." %>

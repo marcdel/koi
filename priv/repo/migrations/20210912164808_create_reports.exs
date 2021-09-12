@@ -5,7 +5,7 @@ defmodule Koi.Repo.Migrations.CreateReports do
     create table(:reports) do
       add :date, :date
       add :notes, :string
-      add :user_id, references(:users, on_delete: :nothing)
+      add :user_id, references(:users, on_delete: :delete_all)
 
       timestamps()
     end

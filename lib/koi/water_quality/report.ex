@@ -13,7 +13,8 @@ defmodule Koi.WaterQuality.Report do
   @doc false
   def changeset(report, attrs) do
     report
-    |> cast(attrs, [:date, :notes])
-    |> validate_required([:date, :notes])
+    |> cast(attrs, [:date, :notes, :user_id])
+    |> validate_required([:date, :user_id])
+    |> foreign_key_constraint(:user_id)
   end
 end
