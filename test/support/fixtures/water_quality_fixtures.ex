@@ -23,4 +23,19 @@ defmodule Koi.WaterQualityFixtures do
 
     report
   end
+
+  @doc """
+  Generate a test_result.
+  """
+  def test_result_fixture(attrs \\ %{}) do
+    {:ok, test_result} =
+      attrs
+      |> Enum.into(%{
+        test_type: "some test_type",
+        value: "120.5"
+      })
+      |> Koi.WaterQuality.create_test_result()
+
+    test_result
+  end
 end

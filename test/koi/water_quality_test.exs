@@ -61,4 +61,60 @@ defmodule Koi.WaterQualityTest do
       assert %Ecto.Changeset{} = WaterQuality.change_report(report)
     end
   end
+
+  describe "test_results" do
+    alias Koi.WaterQuality.TestResult
+
+    import Koi.WaterQualityFixtures
+
+    @invalid_attrs %{test_type: nil, value: nil}
+
+    test "list_test_results/0 returns all test_results" do
+      test_result = test_result_fixture()
+      assert WaterQuality.list_test_results() == [test_result]
+    end
+
+    test "get_test_result!/1 returns the test_result with given id" do
+      test_result = test_result_fixture()
+      assert WaterQuality.get_test_result!(test_result.id) == test_result
+    end
+
+    test "create_test_result/1 with valid data creates a test_result" do
+      valid_attrs = %{test_type: "some test_type", value: "120.5"}
+
+      assert {:ok, %TestResult{} = test_result} = WaterQuality.create_test_result(valid_attrs)
+      assert test_result.test_type == "some test_type"
+      assert test_result.value == Decimal.new("120.5")
+    end
+
+    test "create_test_result/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = WaterQuality.create_test_result(@invalid_attrs)
+    end
+
+    test "update_test_result/2 with valid data updates the test_result" do
+      test_result = test_result_fixture()
+      update_attrs = %{test_type: "some updated test_type", value: "456.7"}
+
+      assert {:ok, %TestResult{} = test_result} = WaterQuality.update_test_result(test_result, update_attrs)
+      assert test_result.test_type == "some updated test_type"
+      assert test_result.value == Decimal.new("456.7")
+    end
+
+    test "update_test_result/2 with invalid data returns error changeset" do
+      test_result = test_result_fixture()
+      assert {:error, %Ecto.Changeset{}} = WaterQuality.update_test_result(test_result, @invalid_attrs)
+      assert test_result == WaterQuality.get_test_result!(test_result.id)
+    end
+
+    test "delete_test_result/1 deletes the test_result" do
+      test_result = test_result_fixture()
+      assert {:ok, %TestResult{}} = WaterQuality.delete_test_result(test_result)
+      assert_raise Ecto.NoResultsError, fn -> WaterQuality.get_test_result!(test_result.id) end
+    end
+
+    test "change_test_result/1 returns a test_result changeset" do
+      test_result = test_result_fixture()
+      assert %Ecto.Changeset{} = WaterQuality.change_test_result(test_result)
+    end
+  end
 end

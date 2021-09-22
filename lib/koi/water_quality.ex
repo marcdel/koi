@@ -101,4 +101,100 @@ defmodule Koi.WaterQuality do
   def change_report(%Report{} = report, attrs \\ %{}) do
     Report.changeset(report, attrs)
   end
+
+  alias Koi.WaterQuality.TestResult
+
+  @doc """
+  Returns the list of test_results.
+
+  ## Examples
+
+      iex> list_test_results()
+      [%TestResult{}, ...]
+
+  """
+  def list_test_results do
+    Repo.all(TestResult)
+  end
+
+  @doc """
+  Gets a single test_result.
+
+  Raises `Ecto.NoResultsError` if the Test result does not exist.
+
+  ## Examples
+
+      iex> get_test_result!(123)
+      %TestResult{}
+
+      iex> get_test_result!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_test_result!(id), do: Repo.get!(TestResult, id)
+
+  @doc """
+  Creates a test_result.
+
+  ## Examples
+
+      iex> create_test_result(%{field: value})
+      {:ok, %TestResult{}}
+
+      iex> create_test_result(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_test_result(attrs \\ %{}) do
+    %TestResult{}
+    |> TestResult.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a test_result.
+
+  ## Examples
+
+      iex> update_test_result(test_result, %{field: new_value})
+      {:ok, %TestResult{}}
+
+      iex> update_test_result(test_result, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_test_result(%TestResult{} = test_result, attrs) do
+    test_result
+    |> TestResult.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a test_result.
+
+  ## Examples
+
+      iex> delete_test_result(test_result)
+      {:ok, %TestResult{}}
+
+      iex> delete_test_result(test_result)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_test_result(%TestResult{} = test_result) do
+    Repo.delete(test_result)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking test_result changes.
+
+  ## Examples
+
+      iex> change_test_result(test_result)
+      %Ecto.Changeset{data: %TestResult{}}
+
+  """
+  def change_test_result(%TestResult{} = test_result, attrs \\ %{}) do
+    TestResult.changeset(test_result, attrs)
+  end
 end
