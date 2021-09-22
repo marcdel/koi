@@ -78,11 +78,11 @@ defmodule KoiWeb.Router do
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
 
     live "/reports", ReportLive.Index, :index
-    live "/reports/new", ReportLive.Index, :new
-    live "/reports/:id/edit", ReportLive.Index, :edit
+    live "/reports/new", ReportLive.New, :new
+    live "/reports/:id/edit", ReportLive.Edit, :edit
 
     live "/reports/:id", ReportLive.Show, :show
-    live "/reports/:id/show/edit", ReportLive.Show, :edit
+    live "/reports/:id/show/edit", ReportLive.Edit, :edit
   end
 
   scope "/", KoiWeb do

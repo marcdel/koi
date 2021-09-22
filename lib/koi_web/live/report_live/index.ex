@@ -53,7 +53,7 @@ defmodule KoiWeb.ReportLive.Index do
   end
 
   defp user_id(socket) do
-    if (Map.has_key?(socket.assigns, :user)) do
+    if Map.has_key?(socket.assigns, :user) do
       socket.assigns.user.id
     else
       nil

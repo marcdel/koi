@@ -1,0 +1,26 @@
+<div>
+<.form
+  let={f}
+  for={@changeset}
+  id="test-selection-form"
+  phx-change="validate"
+  phx-target={@myself}
+  phx-submit="next">
+
+  <%= inputs_for f, :test_results, fn r -> %>
+    <%= label r, :test_type %>
+    <%= select r, :test_type, @test_types %>
+    <%= error_tag r, :test_type %>
+
+    <%= label r, :value %>
+    <%= number_input r, :value %>
+    <%= error_tag r, :value %>
+  <% end %>
+
+  <button phx-click="add_test" phx-target={@myself}>+ Add Test</button>
+
+  <div>
+    <%= submit "Next" %>
+  </div>
+</.form>
+</div>

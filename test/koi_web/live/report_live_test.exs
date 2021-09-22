@@ -6,7 +6,7 @@ defmodule KoiWeb.ReportLiveTest do
 
   @create_attrs %{date: %{day: 11, month: 9, year: 2021}, notes: "some notes"}
   @update_attrs %{date: %{day: 12, month: 9, year: 2021}, notes: "some updated notes"}
-  @invalid_attrs %{date: %{day: 30, month: 2, year: 2021}, notes: nil}
+  @invalid_attrs %{date: %{day: 31, month: 11, year: 2021}}
 
   defp create_report(%{user: user}) do
     # use the user from :register_and_log_in_user
@@ -32,7 +32,7 @@ defmodule KoiWeb.ReportLiveTest do
       assert index_live |> element("a", "New Report") |> render_click() =~
                "New Report"
 
-      assert_patch(index_live, Routes.report_index_path(conn, :new))
+      assert_patch(index_live, Routes.report_new_path(conn, :new))
 
       assert index_live
              |> form("#report-form", report: @invalid_attrs)
@@ -51,10 +51,11 @@ defmodule KoiWeb.ReportLiveTest do
     test "updates report in listing", %{conn: conn, report: report} do
       {:ok, index_live, _html} = live(conn, Routes.report_index_path(conn, :index))
 
-      assert index_live |> element("#report-#{report.id} a", "Edit") |> render_click() =~
-               "Edit Report"
+      #      assert index_live |> element("#report-#{report.id} a", "Edit") |> render_click() =~
+      #               "Edit Report"
+      index_live |> element("#report-#{report.id} a", "Edit") |> render_click()
 
-      assert_patch(index_live, Routes.report_index_path(conn, :edit, report))
+      assert_patch(index_live, Routes.report_edit_path(conn, :edit, report))
 
       assert index_live
              |> form("#report-form", report: @invalid_attrs)

@@ -21,7 +21,13 @@
     <%= @report.notes %>
   </li>
 
+  <li>
+    <strong>Results:</strong>
+    <%= for result <- @report.test_results do %>
+      <%= result.test_type %>: <%= result.value %>
+    <% end %>
+  </li>
 </ul>
 
-<span><%= live_patch "Edit", to: Routes.report_show_path(@socket, :edit, @report), class: "button" %></span> |
+<span><%= live_patch "Edit", to: Routes.report_edit_path(@socket, :edit, @report), class: "button" %></span> |
 <span><%= live_redirect "Back", to: Routes.report_index_path(@socket, :index) %></span>

@@ -1,0 +1,7 @@
+<%= live_component KoiWeb.ReportLive.TestSelectionComponent,
+    id: :new,
+    title: @page_title,
+    report: @report,
+    return_to: Routes.report_index_path(@socket, :index) %>
+
+<span><%= live_redirect "Back", to: Routes.report_index_path(@socket, :index) %></span>

@@ -1,6 +1,6 @@
 <h1>Listing Reports</h1>
 
-<%= if @live_action in [:new, :edit] do %>
+<%= if @live_action in [:new] do %>
   <%= live_modal KoiWeb.ReportLive.FormComponent,
     id: @report.id || :new,
     title: @page_title,
@@ -26,7 +26,7 @@
 
         <td>
           <span><%= live_redirect "Show", to: Routes.report_show_path(@socket, :show, report) %></span>
-          <span><%= live_patch "Edit", to: Routes.report_index_path(@socket, :edit, report) %></span>
+          <span><%= live_patch "Edit", to: Routes.report_edit_path(@socket, :edit, report) %></span>
           <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: report.id, data: [confirm: "Are you sure?"] %></span>
         </td>
       </tr>
@@ -34,4 +34,4 @@
   </tbody>
 </table>
 
-<span><%= live_patch "New Report", to: Routes.report_index_path(@socket, :new) %></span>
+<span><%= live_patch "New Report", to: Routes.report_new_path(@socket, :new) %></span>

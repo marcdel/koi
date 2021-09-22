@@ -1,4 +1,4 @@
-defmodule KoiWeb.ReportLive.Show do
+defmodule KoiWeb.ReportLive.Edit do
   use KoiWeb, :live_view
 
   alias Koi.WaterQuality
@@ -12,7 +12,7 @@ defmodule KoiWeb.ReportLive.Show do
   def handle_params(%{"id" => id}, _, socket) do
     {:noreply,
      socket
-     |> assign(:page_title, "Show Report")
+     |> assign(:page_title, "Edit Report")
      |> assign(:report, WaterQuality.get_report!(id))}
   end
 end
