@@ -17,7 +17,8 @@ defmodule Koi.WaterQualityFixtures do
       |> Enum.into(%{
         date: ~D[2021-09-11],
         notes: "some notes",
-        user_id: user_id
+        user_id: user_id,
+        test_results: []
       })
       |> Koi.WaterQuality.create_report()
 

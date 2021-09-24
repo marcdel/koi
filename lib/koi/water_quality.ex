@@ -7,6 +7,7 @@ defmodule Koi.WaterQuality do
   alias Koi.Repo
 
   alias Koi.WaterQuality.Report
+  alias Koi.WaterQuality.TestResult
 
   @doc """
   Returns the list of reports.
@@ -18,7 +19,9 @@ defmodule Koi.WaterQuality do
 
   """
   def list_reports(user_id) do
-    Repo.all(from report in Report, where: report.user_id == ^user_id)
+    from(report in Report, where: report.user_id == ^user_id)
+    |> Repo.all()
+    |> Repo.preload(test_results: from(r in TestResult, order_by: r.id))
   end
 
   @doc """
@@ -35,7 +38,11 @@ defmodule Koi.WaterQuality do
       ** (Ecto.NoResultsError)
 
   """
-  def get_report!(id), do: Repo.get!(Report, id)
+  def get_report!(id) do
+    Report
+    |> Repo.get!(id)
+    |> Repo.preload(test_results: from(r in TestResult, order_by: r.id))
+  end
 
   @doc """
   Creates a report.
@@ -101,8 +108,6 @@ defmodule Koi.WaterQuality do
   def change_report(%Report{} = report, attrs \\ %{}) do
     Report.changeset(report, attrs)
   end
-
-  alias Koi.WaterQuality.TestResult
 
   @doc """
   Returns the list of test_results.
